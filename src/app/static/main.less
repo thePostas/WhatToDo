@@ -6,23 +6,29 @@
 html {
   height: 100%;
 }
+
 body {
-  min-height: 100%;
-  background: rgb(113,176,210);
-  background: linear-gradient(180deg, rgba(113,176,210,1) 0%, rgba(59,231,187,1) 50%);
+  padding-top: 50px;
+  box-sizing: border-box;
+  height: 100%;
+  background: -webkit-linear-gradient(bottom, rgba(115, 176, 211, 1.0), rgba(59, 232, 187, 1.0));
+  background: -moz-linear-gradient(bottom, rgba(115, 176, 211, 1.0), rgba(59, 232, 187, 1.0));
+  background: linear-gradient(to top, rgba(115, 176, 211, 1.0), rgba(59, 232, 187, 1.0));
 }
 
 @bar-color: #f7f7f7;
+@text-color: #636363;
 
 .wrapper {
-  margin: 50px auto;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
+  margin: 0 auto;
   width: 500px;
-  height: 600px;
   background-color: #fff;
+  max-height: 417px;
+  overflow: hidden;
 }
 
 .controls {
@@ -62,11 +68,90 @@ body {
 .task-text {
   display: -webkit-flex;
   display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
   -webkit-align-items: center;
   align-items: center;
   height: 40px;
   &__input {
+    box-sizing: border-box;
+    padding: 0 8px;
     height: 60%;
-    width: 75%;
+    width: 83%;
+  }
+}
+
+.create-button {
+  height: 60%;
+  width: 15%;
+}
+
+.tasks-container {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  min-height: 50px;
+  max-height: 300px;
+  overflow: auto;
+  &__inner {
+
+  }
+}
+
+.no-tasks {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  &__text {
+    font: 28px Tahoma, sans-serif;
+    color: @text-color;
+  }
+}
+
+.task {
+  position: relative;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  max-width: 100%;
+  height: 50px;
+  color: @text-color;
+  &:nth-child(even) {
+    background-color: #f7f7f7;
+  }
+  &__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 90%;
+  }
+  &__close-button {
+    filter: opacity(0);
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 20%;
+    right: 10px;
+    transform: scale(0.8);
+    &:hover {
+      color: red;
+      transform: scale(1);
+    }
+    &-image {
+      pointer-events: none;
+    }
+  }
+  &:hover .task__close-button {
+    filter: opacity(1);
   }
 }
