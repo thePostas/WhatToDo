@@ -1,0 +1,1 @@
+import './app/static/main.less';

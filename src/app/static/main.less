@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  background: rgb(113,176,210);
+  background: linear-gradient(180deg, rgba(113,176,210,1) 0%, rgba(59,231,187,1) 50%);
+}
+
+@bar-color: #f7f7f7;
+
+.wrapper {
+  margin: 50px auto;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 500px;
+  height: 600px;
+  background-color: #fff;
+}
+
+.controls {
+  height: 80px;
+}
+
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #0097a7;
+  color: #fff;
+  font: 28px "Times New Roman", sans-serif;
+}
+
+.controls {
+  background-color: @bar-color;
+  padding: 5px 5px 0 5px;
+}
+
+.progress-bar {
+  height: 40px;
+  box-sizing: border-box;
+  &__done {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    height: 100%;
+    border: 1px solid darken(@bar-color, 25%);
+    background: rgb(2,82,26);
+    background: linear-gradient(90deg, rgba(2,82,26,1) 0%, rgba(0,255,89,1) 50%);
+  }
+}
+
+.task-text {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  height: 40px;
+  &__input {
+    height: 60%;
+    width: 75%;
+  }
+}
