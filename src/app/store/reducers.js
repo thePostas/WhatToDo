@@ -31,7 +31,7 @@ export function taskReducer(state = {}, action) {
                 {
                     tasks: state.tasks.filter((task, index) => {
                         if (task.id !== action.payload.id) {
-                            task.id = index;
+                            task.id = index - 1;
                             return task;
                         }
                     })

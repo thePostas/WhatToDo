@@ -8,6 +8,7 @@ class TaskText extends Component {
         this.state = {
             ...props
         };
+        this.onKeyDown = this.props.onKeyDown.bind(this);
         this.ref = React.createRef();
     }
 
@@ -16,7 +17,7 @@ class TaskText extends Component {
             <div className="task-text">
                 <input
                     onChange={ this.props.onChange }
-                    onKeyDown={ this.props.onKeyDown }
+                    onKeyDown={ this.onKeyDown }
                     type={ 'text' }
                     className="task-text__input"
                     value={ this.props.value }
@@ -28,10 +29,9 @@ class TaskText extends Component {
 }
 
 const mapStateToProps = function(state) {
-    if (state.input === "") {
         return {
             value: state.input
-        }
+
     }
 };
 
@@ -45,12 +45,14 @@ const mapDispatchToProps = function(dispatch) {
                 }
             });
         },
-        onKeyDown: event => {
-            let key = event.which || event.keyCode;
-            if (key === 13) {
-                dispatch({
-                    type: "CREATE_TASK"
-                })
+        onKeyDown: function (event) {
+            if (this.props.value) {
+                let key = event.which || event.keyCode;
+                    if (key === 13) {
+                        dispatch({
+                            type: "CREATE_TASK"
+                        })
+                    }
             }
         }
     };

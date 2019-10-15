@@ -10,6 +10,7 @@ class Tasks extends Component {
         }
     }
     render() {
+        console.log("UPDATE");
         if (this.props.tasks.length !== 0) {
             const tasks = this.props.tasks.map((task, index) => {
                 return <Task
