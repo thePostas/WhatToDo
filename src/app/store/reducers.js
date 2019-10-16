@@ -39,7 +39,8 @@ export function taskReducer(state = {}, action) {
                 {},
                 state,
                 {
-                    tasks: state.tasks.map((task) => {
+                    tasks: state.tasks.map((task, index) => {
+                        task.id = index;
                         if (task.id === action.payload.id) {
                             task.isDone = !task.isDone;
                         }

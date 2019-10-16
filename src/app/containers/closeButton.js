@@ -50,6 +50,7 @@ const mapStateToProps = function(state) {
 const mapDispatchToProps = function(dispatch) {
     return {
         onClick: function () {
+            console.log("DELETE", this.state.id);
             dispatch({
                 type: "DELETE_TASK",
                 payload: {

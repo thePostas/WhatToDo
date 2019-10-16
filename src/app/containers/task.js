@@ -23,8 +23,8 @@ export default class TaskComponent extends Component {
                 <span className="task__text">
                     { this.props.text }
                 </span>
-                <CloseButton id={ this.state.id }/>
-                <CompleteButton id={ this.state.id } isDone={ this.props.isDone }/>
+                <CloseButton id={ this.props.id }/>
+                <CompleteButton id={ this.props.id } isDone={ this.props.isDone }/>
             </div>
         )
     }
