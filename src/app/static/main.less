@@ -6,23 +6,30 @@
 html {
   height: 100%;
 }
+
 body {
-  min-height: 100%;
-  background: rgb(113,176,210);
-  background: linear-gradient(180deg, rgba(113,176,210,1) 0%, rgba(59,231,187,1) 50%);
+  padding-top: 50px;
+  box-sizing: border-box;
+  height: 100%;
+  background: -webkit-linear-gradient(bottom, rgba(115, 176, 211, 1.0), rgba(59, 232, 187, 1.0));
+  background: -moz-linear-gradient(bottom, rgba(115, 176, 211, 1.0), rgba(59, 232, 187, 1.0));
+  background: linear-gradient(to top, rgba(115, 176, 211, 1.0), rgba(59, 232, 187, 1.0));
 }
 
 @bar-color: #f7f7f7;
+@text-color: #636363;
+@task-height: 50px;
 
 .wrapper {
-  margin: 50px auto;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
+  margin: 0 auto;
   width: 500px;
-  height: 600px;
   background-color: #fff;
+  max-height: 467px;
+  overflow: hidden;
 }
 
 .controls {
@@ -43,9 +50,18 @@ body {
 }
 
 .progress-bar {
+  width: 100%;
+  position: relative;
   height: 40px;
   box-sizing: border-box;
+  border: 1px solid darken(@bar-color, 25%);
+  &__percent {
+    position: absolute;
+    left: 48%;
+    top: 10px;
+  }
   &__done {
+    transition: all .5s;
     display: -webkit-flex;
     display: flex;
     -webkit-justify-content: center;
@@ -53,7 +69,6 @@ body {
     -webkit-align-items: center;
     align-items: center;
     height: 100%;
-    border: 1px solid darken(@bar-color, 25%);
     background: rgb(2,82,26);
     background: linear-gradient(90deg, rgba(2,82,26,1) 0%, rgba(0,255,89,1) 50%);
   }
@@ -62,11 +77,144 @@ body {
 .task-text {
   display: -webkit-flex;
   display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
   -webkit-align-items: center;
   align-items: center;
   height: 40px;
   &__input {
+    box-sizing: border-box;
+    padding: 0 8px;
     height: 60%;
-    width: 75%;
+    width: 83%;
   }
+}
+
+.create-button {
+  height: 60%;
+  width: 15%;
+}
+
+.tasks-container {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  min-height: 50px;
+  max-height: 100%;
+  overflow: auto;
+  &__inner {
+
+  }
+}
+
+.no-tasks {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  &__text {
+    font: 28px Tahoma, sans-serif;
+    color: @text-color;
+  }
+}
+
+.task {
+  position: relative;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  max-width: 100%;
+  height: @task-height;
+  color: @text-color;
+  &_done {
+    text-decoration: line-through;
+  }
+  &:nth-child(even) {
+    background-color: #f7f7f7;
+  }
+  &__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 90%;
+  }
+  &__close-button {
+    filter: opacity(0);
+    position: absolute;
+    top: 20%;
+    right: 10px;
+    transform: scale(0.8);
+    cursor: pointer;
+    &:hover {
+      color: red;
+      transform: scale(1);
+    }
+    &-image {
+      pointer-events: none;
+    }
+  }
+
+  &:hover .task__close-button {
+    filter: opacity(1);
+  }
+  &__complete-button {
+    filter: opacity(0.3);
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 20%;
+    left: 10px;
+    cursor: pointer;
+    &_done {
+      filter: opacity(1);
+    }
+    &:hover {
+      filter: opacity(1);
+    }
+    &-image {
+      pointer-events: none;
+    }
+  }
+}
+
+
+::-webkit-scrollbar-button {
+  background-image:url('');
+  background-repeat:no-repeat;
+  width:5px;
+  height:0;
+}
+
+::-webkit-scrollbar-track {
+  background-color:#ecedee
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background-color:#6dc0c8;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color:#56999f;
+}
+
+::-webkit-resizer{
+  background-image:url('');
+  background-repeat:no-repeat;
+  width:4px;
+  height:0;
+}
+
+::-webkit-scrollbar{
+  width: 4px;
 }
