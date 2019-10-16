@@ -54,6 +54,7 @@ const mapStateToProps = function(state) {
 const mapDispatchToProps = function(dispatch) {
     return {
         onClick: function () {
+            console.log("DONE", this.state.id);
             dispatch({
                 type: "COMPLETE_TASK",
                 payload: {
