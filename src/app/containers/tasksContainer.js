@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Task } from './task';
+import TaskComponent from './task';
 
 class Tasks extends Component {
     constructor(props) {
         super(props);
         this.state = {
             ...props
-        }
+        };
+        this.calcPercent = this.props.calcPercent.bind(this);
     }
+
     render() {
-        console.log("UPDATE");
         if (this.props.tasks.length !== 0) {
             const tasks = this.props.tasks.map((task, index) => {
-                return <Task
+                return <TaskComponent
                     key={ index }
                     id={ task.id }
                     text={ task.text }
+                    isDone={ task.isDone }
                 />
             });
-            console.log(tasks);
+            this.calcPercent();
             return (
                 <div className="tasks-container">
                     <div className="tasks-container__inner">
@@ -28,6 +30,7 @@ class Tasks extends Component {
                 </div>
             )
         } else {
+            this.calcPercent();
             return (
                 <div className={'no-tasks'}>
                     <span className="no-tasks__text">
@@ -45,7 +48,24 @@ const mapStateToProps = function(state) {
     }
 };
 
+const mapDispatchToProps = function(dispatch) {
+    return {
+        calcPercent: function () {
+            let doneTasks = 0;
+            this.props.tasks.map(task => {
+                task.isDone ? doneTasks++ : null;
+            });
+                dispatch({
+                    type: "CALCULATE_PERCENT",
+                    payload: {
+                        doneTasks: doneTasks
+                    }
+                })
+        }
+    };
+};
+
 export const TasksContainer = connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(Tasks);

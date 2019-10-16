@@ -22,6 +22,11 @@ class Button extends Component {
     }
 }
 
+Button.defaultProps = {
+  id: 0,
+  value: ''
+};
+
 const mapStateToProps = function(state) {
     return {
         value: state.input

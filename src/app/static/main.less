@@ -18,6 +18,7 @@ body {
 
 @bar-color: #f7f7f7;
 @text-color: #636363;
+@task-height: 50px;
 
 .wrapper {
   display: -webkit-flex;
@@ -27,7 +28,7 @@ body {
   margin: 0 auto;
   width: 500px;
   background-color: #fff;
-  max-height: 417px;
+  max-height: 467px;
   overflow: hidden;
 }
 
@@ -49,9 +50,18 @@ body {
 }
 
 .progress-bar {
+  width: 100%;
+  position: relative;
   height: 40px;
   box-sizing: border-box;
+  border: 1px solid darken(@bar-color, 25%);
+  &__percent {
+    position: absolute;
+    left: 48%;
+    top: 10px;
+  }
   &__done {
+    transition: all .5s;
     display: -webkit-flex;
     display: flex;
     -webkit-justify-content: center;
@@ -59,7 +69,6 @@ body {
     -webkit-align-items: center;
     align-items: center;
     height: 100%;
-    border: 1px solid darken(@bar-color, 25%);
     background: rgb(2,82,26);
     background: linear-gradient(90deg, rgba(2,82,26,1) 0%, rgba(0,255,89,1) 50%);
   }
@@ -93,7 +102,7 @@ body {
   flex-direction: column;
   width: 100%;
   min-height: 50px;
-  max-height: 300px;
+  max-height: 100%;
   overflow: auto;
   &__inner {
 
@@ -124,8 +133,11 @@ body {
   -webkit-align-items: center;
   align-items: center;
   max-width: 100%;
-  height: 50px;
+  height: @task-height;
   color: @text-color;
+  &_done {
+    text-decoration: line-through;
+  }
   &:nth-child(even) {
     background-color: #f7f7f7;
   }
@@ -137,12 +149,11 @@ body {
   }
   &__close-button {
     filter: opacity(0);
-    font-size: 28px;
-    font-weight: bold;
     position: absolute;
     top: 20%;
     right: 10px;
     transform: scale(0.8);
+    cursor: pointer;
     &:hover {
       color: red;
       transform: scale(1);
@@ -151,7 +162,59 @@ body {
       pointer-events: none;
     }
   }
+
   &:hover .task__close-button {
     filter: opacity(1);
   }
+  &__complete-button {
+    filter: opacity(0.3);
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 20%;
+    left: 10px;
+    cursor: pointer;
+    &_done {
+      filter: opacity(1);
+    }
+    &:hover {
+      filter: opacity(1);
+    }
+    &-image {
+      pointer-events: none;
+    }
+  }
+}
+
+
+::-webkit-scrollbar-button {
+  background-image:url('');
+  background-repeat:no-repeat;
+  width:5px;
+  height:0;
+}
+
+::-webkit-scrollbar-track {
+  background-color:#ecedee
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background-color:#6dc0c8;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color:#56999f;
+}
+
+::-webkit-resizer{
+  background-image:url('');
+  background-repeat:no-repeat;
+  width:4px;
+  height:0;
+}
+
+::-webkit-scrollbar{
+  width: 4px;
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import icon from '../img/close.svg';
+import icon from '../img/check.svg';
 
-class CloseButtonComponent extends Component {
+class CompleteButtonComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,11 +23,15 @@ class CloseButtonComponent extends Component {
     render() {
         return (
             <div
-                ref={this.ref}
-                className={"task__close-button"}
+                className={
+                    this.props.isDone
+                        ? "task__complete-button task__complete-button_done"
+                        : "task__complete-button"
+                }
+                ref={ this.ref }
             >
                 <object
-                    className={"task__close-button-image"}
+                    className={"task__complete-button-image"}
                     type="image/svg+xml"
                     data={ icon }
                 >
@@ -38,7 +42,7 @@ class CloseButtonComponent extends Component {
     }
 }
 
-CloseButtonComponent.defaultProps = {
+CompleteButtonComponent.defaultProps = {
     id: 0,
     isDone: false
 };
@@ -51,7 +55,7 @@ const mapDispatchToProps = function(dispatch) {
     return {
         onClick: function () {
             dispatch({
-                type: "DELETE_TASK",
+                type: "COMPLETE_TASK",
                 payload: {
                     id: this.state.id
                 }
@@ -60,7 +64,7 @@ const mapDispatchToProps = function(dispatch) {
     };
 };
 
-export const CloseButton = connect(
+export const CompleteButton = connect(
     mapStateToProps,
     mapDispatchToProps
-)(CloseButtonComponent);
+)(CompleteButtonComponent);

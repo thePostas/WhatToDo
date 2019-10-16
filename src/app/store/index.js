@@ -5,7 +5,8 @@ import { logger } from './logger';
 
 const initialState = {
     tasks: [],
-    input: ""
+    input: "",
+    percent: 0
 };
 
 export const store = createStore(taskReducer, initialState, applyMiddleware(logger));
